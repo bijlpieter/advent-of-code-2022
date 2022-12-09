@@ -12,9 +12,6 @@ east = df.iloc[:, ::-1].cummax(axis=1).diff(axis=1).ne(0).iloc[:, ::-1]
 
 print(f"Part 1: {(north | south | west | east).values.sum()}")
 
-
-
-
 grid = df.values
 h, w = grid.shape
 scenic_scores = np.ones_like(grid)

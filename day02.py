@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 with open("day02.txt") as fp:
 	strategy = [i.split() for i in fp.readlines()]

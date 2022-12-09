@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 with open("day04.txt") as fp:
     assignments = [i.strip().split(',') for i in fp.readlines()]

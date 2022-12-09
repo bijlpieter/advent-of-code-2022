@@ -48,4 +48,4 @@ rope = Rope("day09.txt", n=2)
 print(f"Part 1: {rope.num_visited()}")
 
 rope = Rope("day09.txt", n=10)
-print(f"Part 1: {rope.num_visited()}")
+print(f"Part 2: {rope.num_visited()}")

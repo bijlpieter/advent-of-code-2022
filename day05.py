@@ -1,6 +1,3 @@
-import numpy as np
-import pandas as pd
-
 class SupplyStacks:
     def __init__(self, fname):
         with open(fname) as fp:

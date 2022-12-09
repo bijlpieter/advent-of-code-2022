@@ -1,6 +1,3 @@
-import numpy as np
-import pandas as pd
-
 with open("day03.txt") as fp:
 	rucksacks = [i.strip() for i in fp.readlines()]
 
