@@ -1,9 +1,9 @@
 import numpy as np
 from functools import cmp_to_key
 
-def aslist(val): return val if isinstance(val, list) else [val]
 def isint(val): return isinstance(val, int)
 def islist(val): return isinstance(val, list)
+def aslist(val): return val if islist(val) else [val]
 
 def compare(left, right):
 	if isint(left) and isint(right):

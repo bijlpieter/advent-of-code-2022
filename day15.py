@@ -26,13 +26,14 @@ def merge_intervals(intervals: list[Interval]) -> list[Interval]:
 	unmerged = sorted(intervals, key=lambda x: x[0])
 	merged = [unmerged[0]]
 
-	for i_left, i_right in unmerged:
+	for interval in unmerged:
+		i_left, i_right = interval
 		p_left, p_right = merged[-1]
 		if i_left <= p_right:
 			n_right = max(p_right, i_right)
 			merged[-1] = (p_left, n_right)
 		else:
-			merged.append((i_left, i_right))
+			merged.append(interval)
 
 	return merged
 
