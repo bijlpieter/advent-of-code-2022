@@ -41,10 +41,7 @@ def interval_len(interval: Interval) -> int:
 	return right - left + 1
 
 def in_intervals(intervals: list[Interval], val: int) -> bool:
-	for left, right in intervals:
-		if left <= val <= right:
-			return True
-	return False
+	return any(left <= val <= right for left, right in intervals)
 
 def no_beacons(sensors, beacons, y):
 	intervals = get_intervals(sensors, beacons, y)
