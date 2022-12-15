@@ -13,8 +13,11 @@ def compare(left, right):
 		if not left or not right:
 			return bool(left) - bool(right)
 
-		out = compare(left[0], right[0])
-		return out if out else compare(left[1:], right[1:])
+		lhead, *ltail = left
+		rhead, *rtail = right
+
+		out = compare(lhead, rhead)
+		return out if out else compare(ltail, rtail)
 
 	return compare(aslist(left), aslist(right))
 
