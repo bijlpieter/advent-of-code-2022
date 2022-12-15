@@ -9,17 +9,17 @@ def compare(left, right):
 	if isint(left) and isint(right):
 		return np.sign(left - right)
 
-	if islist(left) and islist(right):
-		if not left or not right:
-			return bool(left) - bool(right)
+	if islist(left) != islist(right):
+		return compare(aslist(left), aslist(right))
+	
+	if not left or not right:
+		return bool(left) - bool(right)
 
-		lhead, *ltail = left
-		rhead, *rtail = right
+	lhead, *ltail = left
+	rhead, *rtail = right
 
-		out = compare(lhead, rhead)
-		return out if out else compare(ltail, rtail)
-
-	return compare(aslist(left), aslist(right))
+	out = compare(lhead, rhead)
+	return out if out else compare(ltail, rtail)
 
 with open("day13.txt") as fp:
 	pairs = fp.read().strip().split("\n\n")
