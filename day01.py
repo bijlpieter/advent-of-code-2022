@@ -1,6 +1,6 @@
 import pandas as pd
 
-with open("day1.txt") as fp:
+with open("day01.txt") as fp:
 	ragged = [i.strip().split("\n") for i in fp.read().split("\n\n")]
 
 calories = pd.DataFrame(ragged).fillna(0).astype(int).sum(axis=1)

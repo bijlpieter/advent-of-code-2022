@@ -74,14 +74,13 @@ class Pack:
 	def print(self, round_nr):
 		print(f"== After round {round_nr} ==")
 		for monkey_id, monkey in self.pack.items():
-			print(f"Monkey {monkey_id}: inspected: {monkey.inspections} items:{monkey.items}")
+			print(f"Monkey {monkey_id}: inspections: {monkey.inspections} items: {monkey.items}")
 
 	def get_most_active(self, n=2):
 		return sorted([monkey.inspections for monkey in self.pack.values()])[-n:]
 
 	def get_modulus(self):
 		return int(np.prod([monkey.test for monkey in self.pack.values()]))
-
 
 pack = Pack("day11.txt")
 pack.do_rounds(n=20, do_div=3)

@@ -1,11 +1,18 @@
 import pandas as pd
 
 with open("day06.txt") as fp:
-    signal = [ord(i) for i in fp.read().strip()]
+    signal = list(map(ord, fp.read().strip()))
+
+def all_different(x):
+    return x.nunique() == len(x)
 
 def unique_substr_of_len(signal, n):
-    return pd.Series(signal).rolling(n).apply(lambda x: len(set(x))).eq(n).argmax() + 1
+    return signal.rolling(n).apply(all_different).idxmax()
 
-print(f"Part 1: {unique_substr_of_len(signal, n=4)}")
+series = pd.Series(
+    signal,
+    index=pd.RangeIndex(1, len(signal)+1),
+)
 
-print(f"Part 2: {unique_substr_of_len(signal, n=14)}")
+print(f"Part 1: {unique_substr_of_len(series, n=4)}")
+print(f"Part 2: {unique_substr_of_len(series, n=14)}")

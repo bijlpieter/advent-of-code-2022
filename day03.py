@@ -1,18 +1,31 @@
+from functools import reduce
+import operator
+
+def split(x):
+	n = len(x) // 2
+	return set(x[:n]), set(x[n:])
+
+def get_duplicate(x):
+	unique = reduce(operator.__and__, x)
+	return next(iter(unique))
+
+def priority(c):
+	return ord(c) - (96 if c.islower() else 38)
+
+def priorities(x):
+	return sum(priority(c) for c in x)
+
 with open("day03.txt") as fp:
-	rucksacks = [i.strip() for i in fp.readlines()]
+	rucksacks = fp.read().strip().split("\n")
 
 common = [
-	next(iter(set(x[:len(x)//2]).intersection(set(x[len(x)//2:]))))
+	get_duplicate(split(x))
 	for x in rucksacks
 ]
-priorities = [ord(c) - (96 if c.islower() else 38) for c in common]
-
-print(f"Part 1: {sum(priorities)}")
+print(f"Part 1: {priorities(common)}")
 
 common = [
-	next(iter(set(rucksacks[i]).intersection(set(rucksacks[i+1])).intersection(set(rucksacks[i+2]))))
-	for i in range(0, len(rucksacks), 3)
+	get_duplicate(map(set, i))
+	for i in zip(rucksacks[0::3], rucksacks[1::3], rucksacks[2::3])
 ]
-priorities = [ord(c) - (96 if c.islower() else 38) for c in common]
-
-print(f"Part 2: {sum(priorities)}")
+print(f"Part 2: {priorities(common)}")

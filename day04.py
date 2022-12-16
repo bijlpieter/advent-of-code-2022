@@ -1,19 +1,14 @@
-import numpy as np
+import pandas as pd
+
+def get_interval(istr):
+    left, right = istr.split("-")
+    return pd.Interval(int(left), int(right), closed="both")
 
 with open("day04.txt") as fp:
-    assignments = [i.strip().split(',') for i in fp.readlines()]
+    intervals = [
+        tuple(map(get_interval, duo.split(",")))
+        for duo in fp.read().strip().split("\n")
+    ]
 
-sections = np.zeros((2, len(assignments), 100), dtype=bool)
-
-for i, asg in enumerate(assignments):
-    for j in [0, 1]:
-        s, e = map(int, asg[j].split('-'))
-        sections[j, i, s:e+1] = True
-
-overlap = ((sections[0] & sections[1]) == sections[0]).all(axis=1) | ((sections[0] & sections[1]) == sections[1]).all(axis=1)
-
-print(f"Part 1: {overlap.sum()}")
-
-overlap = sections.all(axis=0).any(axis=1)
-
-print(f"Part 2: {overlap.sum()}")
+print(f"Part 1: {sum(one in two or two in one for one, two in intervals)}")
+print(f"Part 2: {sum(one.overlaps(two) for one, two in intervals)}")
